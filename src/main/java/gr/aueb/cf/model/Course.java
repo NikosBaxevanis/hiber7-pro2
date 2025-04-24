@@ -1,6 +1,5 @@
 package gr.aueb.cf.model;
 
-
 import gr.aueb.cf.core.enums.LessonType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,7 +7,6 @@ import lombok.*;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,18 +28,19 @@ public class Course {
     @Column(columnDefinition = "TEXT")
     private String comments;
 
-    @Enumerated(EnumType.ORDINAL) //default is ordinal
-    @Column(name = "lesson_type" , columnDefinition = "TINYINT COMMENT 'ΕΙΔΟΣ ΜΑΘΗΜΑΤΟΣ (1. Θεωρία, 2. Εργαστήριο , 3. Μικτό'")
+    @Enumerated(EnumType.ORDINAL)   // default is ordinal
+    @Column(name = "lesson_type", columnDefinition = "TINYINT COMMENT 'ΕΙΔΟΣ ΜΑΘΗΜΑΤΟΣ (1. Θεωρία, 2. Εργαστήριο, 3. Μικτό'")
     private LessonType lessonType;
 
     @Getter(AccessLevel.PROTECTED)
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "courses_teachers") //table-name + _id
+    @JoinTable(name = "courses_teachers")   // table-name + _id
 //    @JoinTable(name = "courses_teachers",
 //            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "teacher_id" , referencedColumnName = "id")
+//            inverseJoinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id")
 //    )
     private Set<Teacher> teachers = new HashSet<>();
+
 
     public Set<Teacher> getAllTeachers() {
         return Collections.unmodifiableSet(teachers);
@@ -50,13 +49,13 @@ public class Course {
     public void addTeacher(Teacher teacher) {
         if (teachers == null) teachers = new HashSet<>();
         teachers.add(teacher);
-        teachers.getCourses().add(this);
+        teacher.getCourses().add(this);
     }
 
     public void removeTeacher(Teacher teacher) {
-        if (teacher == null) return;
+        if (teachers == null) return;
         teachers.remove(teacher);
-        teachers.getCourses.remove(this);
+        teacher.getCourses().remove(this);
     }
 
     @Override

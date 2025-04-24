@@ -37,7 +37,7 @@ public class Teacher {
     @ManyToMany(mappedBy = "teachers" ,fetch = FetchType.LAZY)
     private Set<Course> courses = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "teacher_more_info_id")
     private TeacherMoreInfo teacherMoreInfo;
 
@@ -57,9 +57,9 @@ public class Teacher {
         course.getTeachers().remove(this);
     }
 
-    public void addRegion() {
-        this.setRegion(region);
-        region.addTeacher(this);
+    public void addRegion( Region region) {
+        this.setRegion(this.region);
+        this.region.addTeacher(this);
     }
 
     @Override
