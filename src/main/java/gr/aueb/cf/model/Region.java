@@ -1,6 +1,5 @@
 package gr.aueb.cf.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,18 +16,17 @@ import java.util.Set;
 public class Region {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private String title;
 
     @Getter(AccessLevel.PROTECTED)
-    @OneToMany(mappedBy = "region" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
     private Set<Teacher> teachers = new HashSet<>();
 
-    public Region( String title) {
-
+    public Region(String title) {
         this.title = title;
     }
 
@@ -36,8 +34,8 @@ public class Region {
         return Collections.unmodifiableSet(teachers);
     }
 
-    public  void addTeacher(Teacher teacher) {
-        if (teachers == null) teachers = new HashSet<>();
+    public void addTeacher(Teacher teacher) {
+        if (teacher == null) teachers = new HashSet<>();
         teachers.add(teacher);
         teacher.setRegion(this);
     }

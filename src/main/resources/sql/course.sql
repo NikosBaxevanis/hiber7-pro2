@@ -10,4 +10,5 @@ INSERT INTO `courses` (id, title, comments, lesson_type) VALUES (1,'Java', '', 1
 	(8,'SQL', '', 3),
 	(9,'React', '', 2),
 	(10,'Angular', '', 3);
+
 ALTER TABLE courses AUTO_INCREMENT = 11;

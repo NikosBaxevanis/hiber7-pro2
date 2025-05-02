@@ -12,13 +12,12 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @Entity
-@Table(name = "teacher_more_info.sql")
+@Table(name = "teacher_more_info")
 public class TeacherMoreInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @Column(name = "date_of_birth")
     private LocalDateTime dateOfBirth;

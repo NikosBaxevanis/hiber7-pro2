@@ -1,10 +1,10 @@
-USE hiber7pro2db;
+use hiber7pro2db;
 
-INSERT INTO `teachers` (id, firstname, lastname, is_active, region_id, teacher_more_info_id) VALUES
-    (1,'Αθανάσιος','Ανδρούτσος',true, 1,NULL),
-	(2,'Μάκης','Καπέτης', true, 2,NULL),
-	(3,'Μάρκος','Καραμπάτσης',true, 5,NULL),
-	(4,'Παναγιώτης','Μόσχος', true, 4,NULL),
-	(5,'Σοφοκλής','Στουραϊτης', true, 8,NULL);
-
-ALTER TABLE teachers AUTO_INCREMENT = 6;
+INSERT INTO `teachers` VALUES (1,1,NULL,'Αθανάσιος','Ανδρούτσος'),
+	(2,1,NULL,'Μάκης','Καπέτης'),
+	(3,2,NULL,'Άννα','Γιαννούτσου'),
+	(4,3,NULL,'Μάρκος','Καραμπάτσης'),
+	(5,4,NULL,'Παναγιώτης','Μόσχος'),
+	(6,4,NULL,'Σοφοκλής','Στουραϊτης');
+    
+ALTER TABLE teachers AUTO_INCREMENT = 7;

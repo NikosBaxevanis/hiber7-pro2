@@ -1,7 +1,7 @@
 package gr.aueb.cf.model;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,15 +34,20 @@ public class Teacher {
     private Region region;
 
     @Getter(AccessLevel.PROTECTED)
-    @ManyToMany(mappedBy = "teachers" ,fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
     private Set<Course> courses = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "teacher_more_info_id")
     private TeacherMoreInfo teacherMoreInfo;
 
     public Set<Course> getAllCourses() {
         return Collections.unmodifiableSet(courses);
+    }
+
+    public void addRegion(Region region) {
+        this.setRegion(region);
+        region.addTeacher(this);
     }
 
     public void addCourse(Course course) {
@@ -55,11 +60,6 @@ public class Teacher {
         if (courses == null) return;
         courses.remove(course);
         course.getTeachers().remove(this);
-    }
-
-    public void addRegion( Region region) {
-        this.setRegion(this.region);
-        this.region.addTeacher(this);
     }
 
     @Override
